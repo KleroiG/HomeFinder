@@ -1,31 +1,15 @@
-import Header  from './components/Header';
-import AgregarInmueble from './components/AgregarInmueble';
-import Inmuebles from './components/Inmuebles';
-import Footer from './components/Footer';
-import Carrusel from './components/Carrusel';
-import Search from './components/Search'
-import Pruebas from './components/Pruebas'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import AgregarInmueble from "./components/AgregarInmueble"
+import Index from "./components/Index"
 
 function App() {
   return (
-    <>
-<div className="flex flex-col min-h-screen">
-      <main className="flex-grow">
-
-        <div className="p-4">
-
-        </div>
-      </main>
-
-      <Header/>
-      <Carrusel/>
-      {/*<Pruebas/>*/}
-      <Search/>
-      <Inmuebles/>
-      <Footer/>
-    </div>
-
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/agregarInmueble" element={<AgregarInmueble />} />
+      </Routes>
+    </Router>
   )
 }
 
