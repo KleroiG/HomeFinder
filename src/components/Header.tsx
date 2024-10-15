@@ -5,7 +5,6 @@ import Login from './Login';  // Importamos el componente Login
 
 const navigation = [
   { name: 'Inicio', href: '#', current: true },
-  { name: 'Sobre Nosotros', href: '#', current: false },
   { name: 'Inmuebles', href: '#', current: false }
 ];
 
@@ -40,6 +39,9 @@ export default function Example() {
                   src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
                   className="h-8 w-auto"
                 />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              HomeFinder
+            </span>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
@@ -50,8 +52,7 @@ export default function Example() {
                       aria-current={item.current ? 'page' : undefined}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'rounded-md px-3 py-2 text-sm font-medium',
-                      )}
+                        'rounded-md px-3 py-2 text-sm font-medium',)}
                     >
                       {item.name}
                     </a>
