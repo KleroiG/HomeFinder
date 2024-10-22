@@ -1,10 +1,9 @@
 import Header from "./Header"
-import AgregarInmueble from "./AgregarInmueble"
 import Inmuebles from "./Inmuebles"
 import Footer from "./Footer"
 import Carrusel from "./Carrusel"
 import Search from "./Search"
-import Pruebas from "./Pruebas"
+import DarkMode from './DarkMode';
 
 function Index() {
   return (
@@ -16,9 +15,9 @@ function Index() {
 
         <Header />
         <Carrusel />
-        {/*<Pruebas/>*/}
         <Search />
         <Inmuebles />
+        <DarkMode />
         <Footer />
       </div>
     </>
