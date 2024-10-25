@@ -40,29 +40,31 @@ const SearchButton: React.FC = () => {
   }, []);
 
   return (
-    <div className={`flex flex-col md:flex-row md:items-center md:justify-between p-4 border rounded-lg shadow-md w-7/10 mx-auto space-y-2 md:space-y-0 bg-gray-100 ${isFixed ? 'fixed top-[64px] left-0 w-full z-50' : 'relative'}`}>
-      <div className={`w-full md:w-1/4`}>
-        <Select
-          value={city}
-          onChange={(selectedCity) => setCity(selectedCity)}
-          options={cities}
-          className="basic-single"
-          classNamePrefix="select"
-          placeholder="Ciudad"
-          isClearable
-          styles={{
-            control: (base) => ({
-              ...base,
-              minHeight: '30px',
-              border: '1px solid #ccc',
-              borderRadius: '0.375rem',
-              width: '100%', // Asegura que el control tenga el mismo tamaño
-            }),
-          }}
-        />
-      </div>
+<div className={`flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg w-7/10 mx-auto space-y-2 md:space-y-0 bg-gray-100 dark:bg-gray-800  ${isFixed ? 'fixed top-[64px] left-0 w-full z-50 rounded-none' : 'relative'}`}>
+  <div className={`w-full md:w-1/4`}>
+    <Select
+      value={city}
+      onChange={(selectedCity) => setCity(selectedCity)}
+      options={cities}
+      className="basic-single dark:text-gray-950 dark:bg-gray-900 dark:border-gray-700"
+      classNamePrefix="select"
+      placeholder="Ciudad"
+      isClearable
+      styles={{
+        control: (base) => ({
+          ...base,
+          minHeight: '30px',
+          width: '100%',
+          backgroundColor: 'bg-gray-900',
+          color: '#0000', 
+          
+        }),
+        
+      }}
+    />
+  </div>
 
-      <div className={`flex space-x-2 w-full md:w-1/2 ${isFixed ? 'flex-wrap' : ''}`}>
+      <div className={`flex space-x-2 w-full md:w-1/2   ${isFixed ? 'flex-wrap' : ''}`}>
         <DatePicker
           selected={startDate}
           onChange={(date: Date | null) => setStartDate(date || undefined)}
@@ -70,7 +72,7 @@ const SearchButton: React.FC = () => {
           startDate={startDate}
           endDate={endDate}
           placeholderText="Inicio"
-          className="border rounded-lg p-1 w-full flex-grow" // Asegura que ocupe espacio igual
+          className=" rounded-lg p-1 w-full flex-grow dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700"
           isClearable
         />
         <DatePicker
@@ -81,7 +83,7 @@ const SearchButton: React.FC = () => {
           endDate={endDate}
           minDate={startDate ? startDate : undefined}
           placeholderText="Fin"
-          className="border rounded-lg p-1 w-full flex-grow" // Asegura que ocupe espacio igual
+          className="border rounded-lg p-1 w-full flex-grow dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700" 
           isClearable
         />
       </div>
@@ -92,7 +94,7 @@ const SearchButton: React.FC = () => {
           value={guests}
           onChange={(e) => setGuests(Math.max(1, Number(e.target.value)))}
           min="1"
-          className="border rounded-lg p-1 w-full text-center hover:bg-blue-100 transition duration-200"
+          className="border rounded-lg p-1 w-full text-center hover:bg-blue-100 transition duration-200 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700"
           placeholder="Personas"
         />
         <span className="absolute right-1 top-1/2 transform -translate-y-1/2">

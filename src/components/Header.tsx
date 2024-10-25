@@ -18,13 +18,11 @@ function classNames(...classes: string[]): string {
 }
 
 export default function Example() {
-
-
   return (
     <>
       <Disclosure
         as="nav"
-        className="bg-gray-800 w-full fixed top-0 left-0 z-50"
+        className="bg-gray-900 w-full fixed top-0 left-0 z-100"
       >
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
@@ -44,14 +42,19 @@ export default function Example() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img
-                  alt="HomeFinder"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
-                />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-                  HomeFinder
-                </span>
+              <a
+            href="/"
+            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+          >
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              className="h-8"
+              alt="Flowbite Logo"
+            />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+              HomeFinder
+            </span>
+          </a>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
@@ -158,6 +161,8 @@ export default function Example() {
           </div>
         </Disclosure.Panel>
       </Disclosure>
+      <div className="pt-16">
+      </div>
     </>
   )
 }

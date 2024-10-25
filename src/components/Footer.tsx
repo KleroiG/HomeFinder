@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
+              <a href="/Team" className="hover:underline me-4 md:me-6">
                 Acerca de nosotros
               </a>
             </li>
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <a href="/Team" className="hover:underline">
                 Contactanos
               </a>
             </li>
