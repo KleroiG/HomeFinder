@@ -27,20 +27,10 @@ const SearchButton: React.FC = () => {
     console.log('Searching for:', { city, startDate, endDate, guests });
   };
 
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    setIsFixed(offset > 100); // Cambia a fijo cuando se desplaza más de 100px
-  };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
-<div className={`flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg w-7/10 mx-auto space-y-2 md:space-y-0 bg-gray-100 dark:bg-gray-800  ${isFixed ? 'fixed top-[64px] left-0 w-full z-50 rounded-none' : 'relative'}`}>
+<div className={`flex flex-col md:flex-row md:items-center md:justify-between p-4 rounded-lg w-7/10 mx-auto space-y-2 md:space-y-0 bg-gray-100 dark:bg-gray-800 `}>
   <div className={`w-full md:w-1/4`}>
     <Select
       value={city}
@@ -64,7 +54,7 @@ const SearchButton: React.FC = () => {
     />
   </div>
 
-      <div className={`flex space-x-2 w-full md:w-1/2   ${isFixed ? 'flex-wrap' : ''}`}>
+      <div className={`flex space-x-2 w-full md:w-1/2 `}>
         <DatePicker
           selected={startDate}
           onChange={(date: Date | null) => setStartDate(date || undefined)}
