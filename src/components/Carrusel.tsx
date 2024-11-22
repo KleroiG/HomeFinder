@@ -33,9 +33,9 @@ const Carousel: React.FC = () => {
   }, []);
 
   return (
-    <div id="default-carousel" className="relative w-full" data-carousel="slide">
+    <div id="default-carousel" className="relative w-full " data-carousel="slide">
       {/* Carousel wrapper */}
-      <div className="relative w-full h-96 overflow-hidden rounded-lg">
+      <div className="relative w-full h-96 overflow-hidden rounded-lg ">
         {images.map((image, index) => (
           <div
             key={index}

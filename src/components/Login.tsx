@@ -3,10 +3,10 @@
 export default function Example() {
 
   return (
-    <div>
+    <div className="dark:bg-gray-800 p-8">
       
     
-      <div className="w-full max-w-sm p-6 m-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="w-full max-w-sm p-6 m-auto bg-white rounded-lg shadow-md dark:bg-gray-900">
         <div className="flex justify-center mx-auto">
           <img
             className="w-auto h-7 sm:h-8"

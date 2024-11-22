@@ -1,24 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 const DarkModeToggle: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    // Recupera el estado del modo oscuro desde localStorage
+    return localStorage.getItem("darkMode") === "true";
+  });
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    // Sincroniza el estado del modo oscuro con el elemento raíz <html>
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    // Almacena el estado en localStorage
+    localStorage.setItem("darkMode", darkMode.toString());
+  }, [darkMode]);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    // Añadimos o removemos la clase 'dark' al elemento raíz <html>
-    if (darkMode) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
+    setIsAnimating(true); // Inicia la animación
+    setDarkMode((prev) => !prev); // Alterna el estado
+
+    setTimeout(() => {
+      setIsAnimating(false); // Detiene la animación después de 2 segundos
+    }, 1000);
   };
 
   return (
     <button
       onClick={toggleDarkMode}
-      className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700"
+      className={`fixed top-20 left-4 z-50 p-3 rounded-full shadow-md transition-all duration-300 ${
+        darkMode
+          ? "bg-gray-900 text-yellow-400"
+          : "bg-yellow-400 text-gray-800"
+      } hover:scale-110`}
     >
-      {darkMode ? 'Modo Claro' : 'Modo Oscuro'}
+      {isAnimating ? (
+        darkMode ? (
+          <MoonIcon className="h-6 w-6 animate-spin" />
+        ) : (
+          <SunIcon className="h-6 w-6 animate-spin" />
+        )
+      ) : darkMode ? (
+        <MoonIcon className="h-6 w-6" />
+      ) : (
+        <SunIcon className="h-6 w-6" />
+      )}
     </button>
   );
 };
