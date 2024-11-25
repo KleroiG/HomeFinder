@@ -1,102 +1,109 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const totalItems = 5; // Total de elementos del carrusel
-  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0); // Definir el tipo explícitamente
+  const totalItems: number = 7; // Asegurar tipo explícito para el total de elementos
 
-  const images = [
-    './Images/inmueble1.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoKG0WcrjaXp1vDSTyJNKm-NBj0_ybnnLi1Q&s',
-    'https://example.com/images/house3.jpg',
-    'https://example.com/images/house4.jpg',
-    'https://example.com/images/house5.jpg',
-  ];
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
-  };
-
-  const goToPrev = () => {
+  const images: string[] = [
+    'https://a0.muscache.com/im/pictures/2aae9259-4a19-47c8-a7ba-6f146e226db6.jpg?im_w=720&im_format=avif',
+    'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTA5NDg4Mzc1ODU5NTgzOTI0/original/8e02189d-ce78-44ad-89b6-512d0495c6a5.jpeg?im_w=720&im_format=avif',
+    'https://a0.muscache.com/im/pictures/62b5a055-f0e2-419f-83df-c2763de8072f.jpg?im_w=720&im_format=avif',
+    'https://a0.muscache.com/im/pictures/miso/Hosting-914724374839458428/original/57c1c921-6924-4e75-b843-66be8ad98679.jpeg?im_w=720&im_format=avif',
+    'https://a0.muscache.com/im/pictures/airflow/Hosting-23503570/original/38b46256-132f-4f4b-962d-8e74f4281cd0.jpg?im_w=720&im_format=avif',
+    'https://a0.muscache.com/im/pictures/miso/Hosting-1152921373932104911/original/9634d01f-8d96-4b7f-9976-0a9f744811e3.jpeg?im_w=960&im_format=avif',
+    'https://a0.muscache.com/im/pictures/miso/Hosting-51542327/original/b1d26da4-7d24-4c0d-a6a3-80985f45e7d8
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? totalItems - 1 : prevIndex - 1
     );
   };
 
-  const handleIndicatorClick = (index: number) => {
-    setCurrentIndex(index);
+  useEffect(() => {
+    const interval = setInterval(goToNext, 4000); // Cambia de imagen cada 3 segundos
+    return () => clearInterval(interval);
+  }, []);.jpeg?im_w=720&im_format=avif',
+  ];
+
+  const goToNext = (): void => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
   };
 
-  useEffect(() => {
-    const interval = setInterval(goToNext, 3000); // Cambia de imagen cada 3 segundos
-    return () => clearInterval(interval); // Limpia el intervalo al desmontar
-  }, []);
+  const goToPrev = (): void => {
 
   return (
-    <div id="default-carousel" className="relative w-full " data-carousel="slide">
+    <div id="carousel" className="relative w-full max-w-3xl mx-auto">
       {/* Carousel wrapper */}
-      <div className="relative w-full h-96 overflow-hidden rounded-lg ">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`duration-700 ease-in-out ${index === currentIndex ? 'block' : 'hidden'}`}
-            data-carousel-item
-            ref={(el) => (carouselItemsRef.current[index] = el)}
-            >
-            <img
-              src={image}
-              alt={`Slide ${index + 1}`}
-              className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
-            />
-          </div>
-        ))}
+      <div className="relative overflow-hidden rounded-lg w-full h-96">
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <div key={index} className="w-full flex-shrink-0">
+              <img
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-96 object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      {/* Slider indicators */}
-      <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        {Array.from({ length: totalItems }).map((_, index) => (
+      {/* Indicators */}
+      <div className="absolute z-30 flex space-x-2 bottom-5 left-1/2 -translate-x-1/2">
+        {images.map((_, index) => (
           <button
             key={index}
             type="button"
-            className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-blue-500' : 'bg-gray-300'}`}
-            aria-current={currentIndex === index}
-            aria-label={`Slide ${index + 1}`}
-            onClick={() => handleIndicatorClick(index)}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full ${
+              currentIndex === index ? 'bg-blue-500' : 'bg-gray-300'
+            }`}
           />
         ))}
       </div>
-      {/* Slider controls */}
+      {/* Controls */}
       <button
         type="button"
-        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         onClick={goToPrev}
+        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none"
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full  bg-gray-800/30  group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white group-focus:ring-gray-800/70 group-focus:outline-none">
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
           <svg
-            className="w-4 h-4 text-white text-gray-800 rtl:rotate-180"
-            aria-hidden="true"
+            className="w-4 h-4 text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 6 10"
           >
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 1 1 5l4 4"
+            />
           </svg>
           <span className="sr-only">Previous</span>
         </span>
       </button>
       <button
         type="button"
-        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         onClick={goToNext}
+        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none"
       >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none">
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
           <svg
-            className="w-4 h-4 text-white text-gray-800 rtl:rotate-180"
-            aria-hidden="true"
+            className="w-4 h-4 text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 6 10"
           >
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 9 4-4-4-4"
+            />
           </svg>
           <span className="sr-only">Next</span>
         </span>
