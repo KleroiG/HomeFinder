@@ -11,7 +11,14 @@ const Carousel: React.FC = () => {
     'https://a0.muscache.com/im/pictures/miso/Hosting-914724374839458428/original/57c1c921-6924-4e75-b843-66be8ad98679.jpeg?im_w=720&im_format=avif',
     'https://a0.muscache.com/im/pictures/airflow/Hosting-23503570/original/38b46256-132f-4f4b-962d-8e74f4281cd0.jpg?im_w=720&im_format=avif',
     'https://a0.muscache.com/im/pictures/miso/Hosting-1152921373932104911/original/9634d01f-8d96-4b7f-9976-0a9f744811e3.jpeg?im_w=960&im_format=avif',
-    'https://a0.muscache.com/im/pictures/miso/Hosting-51542327/original/b1d26da4-7d24-4c0d-a6a3-80985f45e7d8
+    'https://a0.muscache.com/im/pictures/miso/Hosting-51542327/original/b1d26da4-7d24-4c0d-a6a3-80985f45e7d8.jpeg?im_w=720&im_format=avif',
+  ];
+
+  const goToNext = (): void => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
+  };
+
+  const goToPrev = (): void => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? totalItems - 1 : prevIndex - 1
     );
@@ -20,14 +27,7 @@ const Carousel: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(goToNext, 4000); // Cambia de imagen cada 3 segundos
     return () => clearInterval(interval);
-  }, []);.jpeg?im_w=720&im_format=avif',
-  ];
-
-  const goToNext = (): void => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
-  };
-
-  const goToPrev = (): void => {
+  }, []);
 
   return (
     <div id="carousel" className="relative w-full max-w-3xl mx-auto">
