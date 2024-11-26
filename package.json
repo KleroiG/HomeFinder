@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "vite",
     "build": "tsc -b && vite build",
+    "start": "vite preview",
     "lint": "eslint .",
     "preview": "vite preview",
     "test-db": "node ./dbHomeFinder/dbInmuebles.js"
