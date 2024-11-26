@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TeamSection = () => {
     return (
         <section className="bg-white dark:bg-gray-800">
