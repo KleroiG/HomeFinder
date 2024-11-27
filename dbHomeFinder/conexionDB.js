@@ -10,10 +10,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 4173;
 
-app.use(express.static(path.join(__dirname, 'dist')));
+// Ajusta la ruta para servir archivos estáticos desde la carpeta correcta
+app.use(express.static(path.join(__dirname, '..', '..')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  // Ajusta la ruta para enviar el archivo index.html desde la ubicación correcta
+  res.sendFile(path.join(__dirname, '..', '..', 'index.html'));
 });
 
 app.listen(PORT, () => {
