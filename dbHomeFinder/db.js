@@ -1,10 +1,10 @@
-import { pool } from "./conexionDB.js";
+import { pool } from "./database.js";
 
 // Obtener todos los registros
 export const getAll = async () => {
   try {
     const result = await pool.query("SELECT * FROM users");
-    console.log(result.rows);
+    return result.rows;
   } catch (error) {
     console.error(error);
   }
