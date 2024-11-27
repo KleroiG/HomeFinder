@@ -8,4 +8,7 @@ export default defineConfig({
     host: '0.0.0.0',
     port: Number(process.env.PORT) || 4173, // Asegúrate de que el puerto sea configurable
   },
+  build: { 
+    outDir: 'dist', // Carpeta de salida 
+    },
 });
