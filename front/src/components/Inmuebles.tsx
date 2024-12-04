@@ -1,49 +1,57 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-const mapUserToProduct = (user: any) => ({
-  id: user.id,
-  name: user.nombre, // Campo de la base de datos
-  href: '#',
-  price: `$${user.contrasena}`, // Sustituye con el campo adecuado
-  imageSrc: 'https://via.placeholder.com/150',
-  imageAlt: `Imagen de ${user.nombre}`,
-});
+// Define la interfaz para los inmuebles
+interface Inmueble {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  ubicacion: string;
+  precio: string;
+  imagen_url: string;
+}
+export default function Inmuebles() {
+  const [inmuebles, setInmuebles] = useState<Inmueble[]>([]);
+  const [error, setError] = useState<string>("");
 
-export default function Example() {
-  const [products, setProducts] = useState<any[]>([]);
+  // Función para obtener los inmuebles
+  const obtenerInmuebles = async () => {
+    try {
+      const response = await fetch("http://localhost:4173/api/inmuebles");
+      if (!response.ok) {
+        throw new Error("Error al obtener los productos");
+      }
+      const data = await response.json();
+      setInmuebles(data); // Asignamos los inmuebles obtenidos
+    } catch (err) {
+      setError("Error al obtener los productos");
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/inmuebles'); // Llama al backend
-        const users = await response.json();
-        console.log('Datos obtenidos de la API:', users); // Verifica los datos
-        const mappedProducts = users.map(mapUserToProduct);
-        setProducts(mappedProducts);
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      }
-    };
-
-    fetchData();
+    obtenerInmuebles();
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-800">
+    <div className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
+        <h2 className="sr-only">Inmuebles</h2>
+        
+        {error && <p className="text-red-500">{error}</p>}
+
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
-            <a key={product.id} href={product.href} className="group">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          {inmuebles.map((inmueble) => (
+            <a key={inmueble.id} href="#" className="group">
+              <div className="w-full h-64 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-700 xl:h-72">
                 <img
-                  alt={product.imageAlt}
-                  src={product.imageSrc}
+                  alt={inmueble.titulo}
+                  src={inmueble.imagen_url}
                   className="h-full w-full object-cover object-center group-hover:opacity-75"
                 />
               </div>
-              <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+              <h3 className="mt-4 text-sm text-gray-700 dark:text-gray-300">{inmueble.titulo}</h3>
+              <p className="mt-1 text-lg font-medium text-gray-900 dark:text-gray-100">{inmueble.precio}</p>
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{inmueble.ubicacion}</p>
             </a>
           ))}
         </div>
