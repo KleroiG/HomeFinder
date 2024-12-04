@@ -1,4 +1,4 @@
-import { pool } from "./database.js";
+import { pool } from "./database.ts";
 
 // Obtener todos los registros
 export const getAll = async () => {
@@ -67,5 +67,3 @@ export const remove = async (id) => {
     console.error(error);
   }
 };
-
-

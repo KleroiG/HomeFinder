@@ -4,17 +4,19 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+} from "@headlessui/react"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { Link } from "react-router-dom"
 
 const navigation = [
   { name: "Inicio", href: "/", current: true },
   { name: "Inmuebles", href: "/Inmuebles", current: false },
-];
+]
 
-function classNames(...classes: (string | undefined | null | boolean)[]): string {
-  return classes.filter(Boolean).join(" ");
+function classNames(
+  ...classes: (string | undefined | null | boolean)[]
+): string {
+  return classes.filter(Boolean).join(" ")
 }
 
 export default function Example() {
@@ -124,5 +126,5 @@ export default function Example() {
       {/* Espaciador para el contenido debajo */}
       <div className="pt-16"></div>
     </>
-  );
+  )
 }

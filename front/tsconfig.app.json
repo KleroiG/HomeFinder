@@ -22,5 +22,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*", "dbHomeFinder/**/*"]
+  "include": ["src/**/*", "dbHomeFinder/**/*", "../back/src/database.ts"]
 }
