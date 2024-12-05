@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import propertyRouter from "./routes/Propertyrouter"; // Rutas para inmuebles
 import userRouter from "./routes/userRoutes"; // Rutas para usuarios
+import iniciarSesionRouter from "./routes/iniciarSesion"; // Rutas para usuarios
 import db from "./config/db";
 import colors from "colors";
 import cors from "cors";
@@ -37,6 +38,7 @@ server.use((req, res, next) => {
 // Separar rutas de inmuebles y usuarios
 server.use("/api/inmuebles", propertyRouter); // Rutas para inmuebles
 server.use("/api/users", userRouter); // Rutas para usuarios
+server.use("/api/login", iniciarSesionRouter); 
 
 // Middleware para manejar errores
 server.use((err: Error, req: Request, res: Response, next: NextFunction) => {

@@ -56,7 +56,7 @@ export const actualizarProperty = async (req: Request, res: Response) => {
       const { propietario_id, titulo, descripcion, ubicacion, precio, disponibilidad, imagen_url } = req.body;
   
       const propiedad = await Property.findByPk(id); // Buscar propiedad por ID
-  
+        
       if (propiedad) {
         // Actualiza los campos de la propiedad
         propiedad.propietario_id = propietario_id || propiedad.propietario_id;

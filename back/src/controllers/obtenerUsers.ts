@@ -1,30 +1,44 @@
-// src/controllers/userController.ts
-
+import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { User } from './Users'; // Importamos el modelo User
+import { Op } from 'sequelize';
 
+const saltRounds = 10;
 export const createUser = async (req: Request, res: Response) => {
-  try {
-    const { nombre, correo_electronico, contrasena, administrador = false } = req.body;
+    const { username, email, password } = req.body;
+    const nombre=username;
+    const correo_electronico=email
 
-    // Validaciones básicas
-    if (!nombre || !correo_electronico || !contrasena) {
-      return res.status(400).json({ message: 'Nombre, correo electrónico y contraseña son obligatorios.' });
+    // Comprobar si el nombre de usuario o correo electrónico ya existen
+    try {
+      const existingUser = await User.findOne({
+        where: {
+          [Op.or]: [{ nombre }, { correo_electronico }],
+        },
+      });
+  
+      if (existingUser) {
+        return res.status(400).json({ message: "El nombre de usuario o el correo electrónico ya están en uso" });
+      }
+  
+      // Encriptar la contraseña
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+      // Crear el nuevo usuario en la base de datos
+      const newUser = await User.create({
+        nombre,
+        correo_electronico,
+        contrasena: hashedPassword, // Guardar la contraseña encriptada
+        administrador: false, // Si es necesario, ajustar este valor
+        creado_en: new Date(), // Si usas un campo `creado_en`, puedes asignar la fecha actual
+      });
+  
+      return res.status(201).json({ message: "Usuario creado exitosamente", user: newUser });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Hubo un error al crear el usuario" });
     }
-
-    const newUser = await User.create({
-      nombre,
-      correo_electronico,
-      contrasena,
-      administrador
-    });
-
-    res.status(201).json(newUser);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al crear el usuario' });
-  }
-};
+  };
 
 export const getUsers = async (req: Request, res: Response) => {
   try {

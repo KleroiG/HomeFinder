@@ -1,10 +1,10 @@
 import { PhotoIcon } from "@heroicons/react/24/solid"; // Para el icono de foto
 import { MapIcon, SlashIcon } from "@heroicons/react/24/outline"; // Para los iconos de ubicación y precio
-
-
 import { Link } from "react-router-dom";
 
+
 export default function Example() {
+
   return (
     <div className="flex min-h-full items-center justify-center bg-white dark:bg-gray-800">
       <form className="w-full max-w-2xl space-y-6 p-6">
@@ -196,4 +196,5 @@ export default function Example() {
       </form>
     </div>
   );
-}
+};
+
