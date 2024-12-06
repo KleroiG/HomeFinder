@@ -8,6 +8,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import DarkMode from "./components/DarkMode"
 import Team from "./components/Team"
+import InmueblesUsuario from "./components/InmueblesUsuario"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Team" element={<Team />} />
+        <Route path="/InmueblesUsuario" element={<InmueblesUsuario />} />
       </Routes>
       <DarkMode />
       <Footer />

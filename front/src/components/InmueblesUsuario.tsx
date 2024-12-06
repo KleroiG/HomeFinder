@@ -9,21 +9,28 @@ interface Inmueble {
   precio: string;
   imagen_url: string;
 }
-export default function Inmuebles() {
+
+export default function MisInmuebles() {
   const [inmuebles, setInmuebles] = useState<Inmueble[]>([]);
   const [error, setError] = useState<string>("");
 
-  // Función para obtener los inmuebles
+  // Función para obtener los inmuebles del usuario
   const obtenerInmuebles = async () => {
     try {
-      const response = await fetch("http://localhost:4173/api/inmuebles");
+      const userId = localStorage.getItem("userId"); // Obtener el ID del usuario
+      if (!userId) {
+        setError("No se pudo obtener el ID del usuario.");
+        return;
+      }
+
+      const response = await fetch(`http://localhost:4173/api/inmuebles/propietario/${userId}`);
       if (!response.ok) {
-        throw new Error("Error al obtener los productos");
+        throw new Error("Error al obtener los inmuebles");
       }
       const data = await response.json();
       setInmuebles(data); // Asignamos los inmuebles obtenidos
     } catch (err) {
-      setError("Error al obtener los productos");
+      setError("Error al obtener los inmuebles");
       console.error(err);
     }
   };
@@ -35,10 +42,13 @@ export default function Inmuebles() {
   return (
     <div className="bg-white dark:bg-gray-800">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Inmuebles</h2>
+        {/* Cabecera */}
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Mis Inmuebles</h1>
+        <hr className="my-4 border-gray-300 dark:border-gray-600" />
         
         {error && <p className="text-red-500">{error}</p>}
 
+        {/* Lista de inmuebles */}
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {inmuebles.map((inmueble) => (
             <a key={inmueble.id} href="#" className="group">

@@ -82,72 +82,85 @@ export default function Example() {
                 </div>
               </div>
             </div>
+            <Link to={isAuthenticated ? "/agregarInmueble" : "/Login"}>
+                <button
+                  type="button"
+                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
+                  <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Nuevos Inmuebles</span>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-200 data-[focus]:bg-gray-100"
+                  >
+                    Agrega nuevos Inmuebles
+                  </a>
+                </button>
+              </Link>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <Menu as="div" className="relative ml-3">
-                <div>
-                  <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <span className="sr-only">Cuenta</span>
-                    <img alt="" src="./icons/usuario.png" className="h-8 w-8 rounded-full" />
-                  </MenuButton>
-                </div>
-                <MenuItems className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  {isAuthenticated ? (
-                    <>
-                      <MenuItem>
-                        <Link
-                          to="/agregarInmueble"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Agregar Nuevos Inmuebles
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link
-                          to="/mis-inmuebles"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Mis Inmuebles
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link
-                          to="/mis-reservaciones"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Mis Reservaciones
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <button
-                          onClick={handleLogout}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                        >
-                          Salir
-                        </button>
-                      </MenuItem>
-                    </>
-                  ) : (
-                    <>
-                      <MenuItem>
-                        <Link
-                          to="/Register"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Registrarse
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link
-                          to="/Login"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Iniciar Sesión
-                        </Link>
-                      </MenuItem>
-                    </>
-                  )}
-                </MenuItems>
-              </Menu>
+              {!isAuthenticated ? (
+                <>
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <Link
+                      to="/Register"
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                    >
+                      Registrarse
+                    </Link>
+                  </button>
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                    <Link
+                      to="/Login"
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                    >
+                      Iniciar Sesión
+                    </Link>
+                  </button>
+                </>
+              ) : (
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="sr-only">Cuenta</span>
+                      <img alt="" src="./icons/usuario.png" className="h-8 w-8 rounded-full" />
+                    </MenuButton>
+                  </div>
+                  <MenuItems className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <MenuItem>
+                      <Link
+                        to="/agregarInmueble"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Agregar Nuevos Inmuebles
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link
+                        to="/InmueblesUsuario"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Mis Inmuebles
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link
+                        to="/InmueblesUsuario"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Mis Reservaciones
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <button
+                        onClick={handleLogout}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                      >
+                        Salir
+                      </button>
+                    </MenuItem>
+                  </MenuItems>
+                </Menu>
+              )}
             </div>
           </div>
         </div>

@@ -5,17 +5,18 @@ import { Op } from "sequelize";
 
 export const crearProperty = async (req: Request, res: Response) => {
     try {
-      const { propietario_id, titulo, descripcion, ubicacion, precio, disponibilidad, imagen_url } = req.body;
+      const { titulo, descripcion, ubicacion, precio, imagen_url,direccion, propietario_id } = req.body;
       
       const nuevoInmueble = await Property.create({
-        propietario_id,
         titulo,
         descripcion,
         ubicacion,
         precio,
-        disponibilidad,
         imagen_url,
-        creado_en: new Date(), // Establece la fecha de creación
+        direccion,
+        creado_en: new Date(), 
+        propietario_id,
+        disponibilidad: true,
       });
   
       res.status(201).json(nuevoInmueble);
@@ -48,6 +49,32 @@ export const obtenerPropertyPorId = async (req: Request, res: Response) => {
       console.error("Error al obtener propiedad:", error);
       res.status(500).json({ message: "Hubo un error al obtener la propiedad" });
     }
+};
+
+export const buscarPropertiesPorPropietarioId = async (req: Request, res: Response) => {
+  try {
+    const propietarioId = req.params.propietarioId; // ID del propietario pasado como parámetro en la URL
+
+    if (!propietarioId) {
+      return res.status(400).json({ message: "El ID del propietario es obligatorio" });
+    }
+
+    // Buscar todas las propiedades asociadas al propietario
+    const propiedades = await Property.findAll({
+      where: {
+        propietario_id: propietarioId,
+      },
+    });
+
+    if (propiedades.length > 0) {
+      res.status(200).json(propiedades);
+    } else {
+      res.status(404).json({ message: "No se encontraron propiedades para este propietario" });
+    }
+  } catch (error) {
+    console.error("Error al buscar propiedades por propietario ID:", error);
+    res.status(500).json({ message: "Hubo un error al buscar propiedades por propietario ID" });
+  }
 };
 
 export const actualizarProperty = async (req: Request, res: Response) => {

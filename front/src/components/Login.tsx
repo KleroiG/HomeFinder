@@ -34,8 +34,10 @@ export default function Example() {
 
       // Inicio de sesión exitoso
       setError(""); // Limpiar errores
-      localStorage.setItem("token", data.token); // Guardar token en el almacenamiento local
-      navigate("/"); // Redirigir a index.tsx
+      localStorage.setItem("userId", data.id); 
+      localStorage.setItem("token", data.token); 
+      navigate("/"); 
+      window.location.reload();
     } catch (err: unknown) {
       // Manejo de errores
       setError(

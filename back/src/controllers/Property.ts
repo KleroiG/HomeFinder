@@ -28,4 +28,7 @@ export class Property extends Model {
 
   @Column({ type: DataType.STRING, allowNull: true })
   imagen_url!: string;
+
+  @Column({ type: DataType.TEXT, allowNull: true })
+  direccion!: string;
 }

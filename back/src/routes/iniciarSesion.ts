@@ -2,11 +2,11 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../controllers/Users"; // Asegúrate de que la ruta sea correcta
+import { toString } from "express-validator/lib/utils";
 
 const router = Router();
 
 router.post("/", async (req, res) => {
-  console.log("Datos recibidos: ", req.body); // Verifica los datos recibidos
 
   // Cambiar 'username' y 'password' por 'nombre' y 'contrasena'
   const { nombre, contrasena } = req.body;
@@ -31,7 +31,11 @@ router.post("/", async (req, res) => {
 
     // Crear el token
     const token = jwt.sign({ id: user.id, nombre: user.nombre }, "secreto", { expiresIn: "1h" });
-    res.status(200).json({ message: "Inicio de sesión exitoso", token });
+      res.status(200).json({
+        message: "Inicio de sesión exitoso",
+        token,
+        id: user.id
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error interno del servidor" });
