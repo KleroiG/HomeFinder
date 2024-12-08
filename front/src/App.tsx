@@ -9,6 +9,9 @@ import Footer from "./components/Footer"
 import DarkMode from "./components/DarkMode"
 import Team from "./components/Team"
 import InmueblesUsuario from "./components/InmueblesUsuario"
+import InfoInmueble from "./components/InfoInmueble"
+import ReservationsUser from "./components/ReservacionesUsuario"
+import Descubrir from "./components/Descubrir"
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Team" element={<Team />} />
         <Route path="/InmueblesUsuario" element={<InmueblesUsuario />} />
+        <Route path="/inmueble/:id" element={<InfoInmueble />} /> 
+        <Route path="/reservationsUser" element={<ReservationsUser />} /> 
+        <Route path="/Descubrir" element={<Descubrir />} /> 
       </Routes>
       <DarkMode />
       <Footer />

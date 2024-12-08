@@ -57,6 +57,7 @@ const RegistrationForm = () => {
       
       if (response.ok) {
         alert('Usuario creado exitosamente');
+        window.location.href = "/login";
       } else {
         setError(data.message || 'Hubo un error al registrar el usuario.');
       }

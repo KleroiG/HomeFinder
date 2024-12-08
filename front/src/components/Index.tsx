@@ -1,7 +1,6 @@
 
 import Inmuebles from "./Inmuebles"
 import Carrusel from "./Carrusel"
-import Search from "./Search"
 
 
 function Index() {
@@ -12,7 +11,6 @@ function Index() {
           <div className="p-4"></div>
         </main>
         <Carrusel />
-        <Search />
         <Inmuebles />
       </div>
     </>

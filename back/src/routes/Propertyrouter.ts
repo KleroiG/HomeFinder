@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { actualizarProperty, buscarPropertiesPorPropietarioId, crearProperty, eliminarProperty, obtenerProperties, obtenerPropertyPorId } from "../controllers/obtenerProperties";
+import { actualizarDisponibilidad, actualizarProperty, buscarPropertiesPorPropietarioId, crearProperty, eliminarProperty, obtenerProperties, obtenerPropertyPorId } from "../controllers/obtenerProperties";
 const router = Router()
 
 //                Rutas Inmuebles
@@ -16,6 +16,8 @@ router.post("/", crearProperty);
 
 // Actualizar un inmueble por ID
 router.put("/:id", actualizarProperty);
+
+router.patch("/disponibilidad/:id", actualizarDisponibilidad);
 
 // Eliminar un inmueble por ID
 router.delete("/:id", eliminarProperty);

@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 const navigation = [
   { name: "Inicio", href: "/", current: true },
-  { name: "Inmuebles", href: "/Inmuebles", current: false },
+  { name: "Descubrir", href: "/Descubrir", current: false },
 ];
 
 function classNames(...classes: (string | undefined | null | boolean)[]): string {
@@ -31,10 +31,15 @@ export default function Example() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Eliminar el token al cerrar sesión
-    setIsAuthenticated(false); // Cambiar el estado a no autenticado
-    navigate("/"); // Redirigir a la página de inicio
-  };
+  // Eliminar todos los elementos del localStorage
+  localStorage.clear();
+
+  // Cambiar el estado de autenticación
+  setIsAuthenticated(false);
+
+  // Redirigir a la página de inicio
+  navigate("/");
+};
 
   return (
     <>
@@ -100,18 +105,18 @@ export default function Example() {
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               {!isAuthenticated ? (
                 <>
-                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                     <Link
                       to="/Register"
-                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"
                     >
                       Registrarse
                     </Link>
                   </button>
-                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                     <Link
                       to="/Login"
-                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-gray-900 rounded-md group-hover:bg-opacity-0"
                     >
                       Iniciar Sesión
                     </Link>
@@ -144,7 +149,7 @@ export default function Example() {
                     </MenuItem>
                     <MenuItem>
                       <Link
-                        to="/InmueblesUsuario"
+                        to="/reservationsUser"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         Mis Reservaciones

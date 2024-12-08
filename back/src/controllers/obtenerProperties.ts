@@ -3,6 +3,7 @@ import { Property } from "./Property";
 import { Op } from "sequelize";
 
 
+
 export const crearProperty = async (req: Request, res: Response) => {
     try {
       const { titulo, descripcion, ubicacion, precio, imagen_url,direccion, propietario_id } = req.body;
@@ -25,6 +26,8 @@ export const crearProperty = async (req: Request, res: Response) => {
       res.status(500).json({ message: "Hubo un error al crear la propiedad" });
     }
   };
+  
+  
 
   export const obtenerProperties = async (req: Request, res: Response) => {
     try {
@@ -51,6 +54,8 @@ export const obtenerPropertyPorId = async (req: Request, res: Response) => {
     }
 };
 
+
+
 export const buscarPropertiesPorPropietarioId = async (req: Request, res: Response) => {
   try {
     const propietarioId = req.params.propietarioId; // ID del propietario pasado como parámetro en la URL
@@ -76,6 +81,55 @@ export const buscarPropertiesPorPropietarioId = async (req: Request, res: Respon
     res.status(500).json({ message: "Hubo un error al buscar propiedades por propietario ID" });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+export const actualizarDisponibilidad = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+
+    // Buscar la propiedad por ID
+    const propiedad = await Property.findByPk(id);
+
+    if (!propiedad) {
+      return res.status(404).json({ message: "Propiedad no encontrada" });
+    }
+
+    // Mostrar disponibilidad actual
+    console.log("Disponibilidad actual de la propiedad:", propiedad.dataValues.disponibilidad);
+
+    // Cambiar disponibilidad (invertir el valor)
+    const nuevaDisponibilidad = !propiedad.dataValues.disponibilidad;
+
+    // Actualizar solo el campo de disponibilidad
+    await propiedad.update({ disponibilidad: nuevaDisponibilidad });
+
+    console.log("Nueva disponibilidad de la propiedad:", nuevaDisponibilidad);
+
+    // Retornar una respuesta exitosa
+    return res.status(200).json({
+      message: "Se cambió la disponibilidad correctamente",
+      disponibilidad: nuevaDisponibilidad
+    });
+  } catch (error) {
+    console.error("Error al actualizar disponibilidad:", error);
+    return res.status(500).json({ message: "Hubo un error al actualizar la disponibilidad" });
+  }
+};
+
+
+
+
+
+
 
 export const actualizarProperty = async (req: Request, res: Response) => {
     try {
@@ -150,3 +204,4 @@ export const buscarPropertiesPorCiudad = async (req: Request, res: Response) => 
       res.status(500).json({ message: "Hubo un error al buscar propiedades por ciudad" });
     }
 };
+

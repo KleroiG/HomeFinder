@@ -49,7 +49,6 @@ export default function Example() {
       alert("No se pudo obtener el ID del propietario.");
       return;
     }
-    console.log(formData.direccion);
     // Crear el objeto de datos a enviar
     const inmuebleData = {
       titulo: formData.titulo,

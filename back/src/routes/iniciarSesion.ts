@@ -2,7 +2,6 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../controllers/Users"; // Asegúrate de que la ruta sea correcta
-import { toString } from "express-validator/lib/utils";
 
 const router = Router();
 

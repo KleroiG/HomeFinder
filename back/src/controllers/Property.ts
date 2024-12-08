@@ -2,9 +2,6 @@ import { Model, Column, DataType, Table } from "sequelize-typescript";
 
 @Table({ tableName: "properties", timestamps: false })
 export class Property extends Model {
-  // Usamos 'declare' para evitar el conflicto con la clase base
-  declare id: number;
-
   @Column({ type: DataType.INTEGER, allowNull: false })
   propietario_id!: number;
 
@@ -23,7 +20,7 @@ export class Property extends Model {
   @Column({ type: DataType.DECIMAL, allowNull: false })
   precio!: number;
 
-  @Column({ type: DataType.BOOLEAN, allowNull: false })
+  @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: true })
   disponibilidad!: boolean;
 
   @Column({ type: DataType.STRING, allowNull: true })
