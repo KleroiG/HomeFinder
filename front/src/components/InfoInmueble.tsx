@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FaBed, FaBath, FaUser, FaHouseUser, FaMapMarkerAlt, FaMap   } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
@@ -297,10 +297,12 @@ const PropertyDetail = () => {
                 <>
                     <hr className="my-4 mt-5" />
                     <h3 className="text-medium font-semibold mb-1 ">Deseas realizar algun cambio?</h3>
-                    {//<button className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold ">
-                        //Editar Propiedad
-                    //</button>
-                    }
+                    <button className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold " >
+                      <Link to="/Administrador" >
+                        Editar Propiedad
+                        </Link>
+                    </button>
+                    
                     <h3 className="text-sm font-semibold mb-1 mt-10">Cambiar Visibilidad del inmueble:</h3>
                     <div className="flex justify-between items-center">
                         <button
