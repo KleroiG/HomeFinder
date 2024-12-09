@@ -21,12 +21,23 @@ function classNames(...classes: (string | undefined | null | boolean)[]): string
 export default function Example() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Verificar si hay un token JWT en localStorage
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
     if (token) {
       setIsAuthenticated(true); // Si el token está presente, el usuario está autenticado
+      try {
+        // Decodificar el token para obtener el ID del usuario
+
+        if (userId === "14") {
+          setIsAdmin(true); // Verifica si el ID es igual a 14
+        }
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
     }
   }, []);
 
@@ -58,9 +69,9 @@ export default function Example() {
               <div className="flex flex-shrink-0 items-center">
                 <a href="/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
                   <img
-                    src="https://flowbite.com/docs/images/logo.svg"
+                    src="../icons/icono.png"
                     className="h-8"
-                    alt="Flowbite Logo"
+                    alt="HomeFinder Logo"
                   />
                   <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
                     HomeFinder
@@ -84,6 +95,14 @@ export default function Example() {
                       {item.name}
                     </a>
                   ))}
+                  {isAdmin && (
+                    <a
+                      href="/Administrador"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Administrar
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

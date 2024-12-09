@@ -73,29 +73,29 @@ export default function Inmuebles() {
   value={city}
   onChange={(selectedCity) => setCity(selectedCity)}
   options={cities}
-  className="basic-single dark:text-gray-950 dark:bg-gray-800 dark:border-gray-600 mt-10"
+  className="basic-single mt-10"
   classNamePrefix="select"
   placeholder="Selecciona una ciudad"
   isClearable
   styles={{
     menu: (provided) => ({
       ...provided,
-      backgroundColor: '#2d3748', // Fondo más oscuro para el panel
+      backgroundColor: '#edf2f7', // Fondo claro para el menú
     }),
     control: (provided, state) => ({
       ...provided,
-      backgroundColor: '#1a202c', // Fondo más oscuro para el control
-      color: state.isFocused || city ? '#ffffff' : '#cbd5e0', // Texto blanco cuando está seleccionado
-      borderColor: state.isFocused || city ? '#4a5568' : '#2d3748', // Bordes más claros cuando está enfocado
+      backgroundColor: state.isFocused || city ? '#ffffff' : '#f7fafc', // Fondo claro en todo momento
+      color: state.isFocused || city ? '#4a5568' : '#a0aec0', // Texto oscuro cuando está enfocado o seleccionado
+      borderColor: state.isFocused || city ? '#cbd5e0' : '#e2e8f0', // Bordes claros
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: '#ffffff', // Asegura que el texto del valor seleccionado sea blanco
+      color: '#4a5568', // Texto oscuro para el valor seleccionado
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? '#4a5568' : state.isFocused ? '#2d3748' : undefined, // Opciones más oscuras
-      color: state.isSelected || state.isFocused ? '#ffffff' : '#cbd5e0', // Texto blanco cuando seleccionado o enfocado
+      backgroundColor: state.isSelected ? '#cbd5e0' : state.isFocused ? '#f7fafc' : undefined, // Opciones claras cuando están seleccionadas
+      color: state.isSelected || state.isFocused ? '#4a5568' : '#718096', // Texto oscuro cuando está seleccionado o enfocado
     }),
   }}
 />

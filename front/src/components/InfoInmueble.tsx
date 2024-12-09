@@ -1,17 +1,12 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FaBed, FaBath, FaUser, FaHouseUser, FaMapMarkerAlt, FaMap   } from "react-icons/fa";
-import DatePicker from 'react-datepicker';
-
-
-
 const PropertyDetail = () => {
   const { id } = useParams(); 
   const [property, setProperty] = useState<any>(null);
   const [error, setError] = useState<string>('');
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
-  const today = new Date();
+  const [fechaLlegada, setFechaLlegada] = useState<string>("");
+  const [fechaSalida, setFechaSalida] = useState<string>("");
   const [guests] = useState<number>(1); 
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false); 
   const [confirmationAction, setConfirmationAction] = useState<() => void>(() => () => {}); 
@@ -65,6 +60,28 @@ const PropertyDetail = () => {
   };
   
   
+  const handleFechaLlegadaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nuevaFecha = e.target.value;
+    setFechaLlegada(nuevaFecha);
+
+    // Validar que la fecha de llegada no sea anterior a la fecha actual
+    const today = new Date().toISOString().split("T")[0]; // Obtener la fecha actual
+    if (nuevaFecha < today) {
+      alert("La fecha de llegada no puede ser anterior a la fecha actual.");
+      setFechaLlegada(today);
+    }
+  };
+
+  const handleFechaSalidaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nuevaFecha = e.target.value;
+    setFechaSalida(nuevaFecha);
+
+    // Validar que la fecha de salida sea posterior a la fecha de llegada
+    if (nuevaFecha <= fechaLlegada) {
+      alert("La fecha de salida debe ser posterior a la fecha de llegada.");
+      setFechaSalida("");
+    }
+  };
 
   const crearReserva = async () => {
     // Verifica si el usuario está logueado
@@ -74,11 +91,7 @@ const PropertyDetail = () => {
       return; // Esto debería evitar que el flujo continúe y cree una reserva.
     }
   
-    // Validación de los datos
-    if (!startDate || !endDate) {
-      alert('Por favor, selecciona fechas de inicio y fin.');
-      return;
-    }
+    
   
     if (guests <= 0 || guests > property.maxHuespedes) {
       alert('El número de huéspedes no es válido.');
@@ -109,8 +122,8 @@ const PropertyDetail = () => {
         body: JSON.stringify({
           usuario_id,
           inmueble_id: property.id,
-          fecha_inicio: startDate,
-          fecha_fin: endDate,
+          fecha_inicio: fechaLlegada,
+          fecha_fin: fechaSalida,
           estado: true, // Reserva activa
         }),
       });
@@ -245,30 +258,22 @@ const PropertyDetail = () => {
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
             <br />
             <div className="flex space-x-2 w-full">
-                <span>Llegada: </span>
-                <DatePicker
-                    selected={startDate}
-                    onChange={(date: Date | null) => setStartDate(date || undefined)}
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                    placeholderText="DD/MM/AAAA"
-                    className="border rounded-lg p-1 w-full flex-grow dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700"
-                    isClearable
-                    minDate={today}
-                    />
-                <span>Salida: </span>
-                <DatePicker
-                    selected={endDate}
-                    onChange={(date: Date | null) => setEndDate(date || undefined)}
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate || today} 
-                    placeholderText="DD/MM/AAAA"
-                    className="border rounded-lg p-1 w-full flex-grow dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700"
-                    isClearable
-                    />
+            <span>Llegada: </span>
+              <input
+                type="date"
+                className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded px-2 py-1 text-sm w-full mb-2"
+                value={fechaLlegada}
+                onChange={handleFechaLlegadaChange}
+                min={new Date().toISOString().split("T")[0]} // Limitar fechas pasadas
+              />
+              <span>Salida: </span>
+              <input
+                type="date"
+                className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded px-2 py-1 text-sm w-full mb-2"
+                value={fechaSalida}
+                onChange={handleFechaSalidaChange}
+                min={fechaLlegada} // La fecha de salida debe ser posterior a la de llegada
+              />
                     </div>
                     <br />
                 <span>Huéspedes: </span>
@@ -297,11 +302,10 @@ const PropertyDetail = () => {
                 <>
                     <hr className="my-4 mt-5" />
                     <h3 className="text-medium font-semibold mb-1 ">Deseas realizar algun cambio?</h3>
-                    <button className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold " >
-                      <Link to="/Administrador" >
-                        Editar Propiedad
-                        </Link>
-                    </button>
+                {//<button className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold ">
+                        //Editar Propiedad
+                    //</button>
+                  }
                     
                     <h3 className="text-sm font-semibold mb-1 mt-10">Cambiar Visibilidad del inmueble:</h3>
                     <div className="flex justify-between items-center">

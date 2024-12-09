@@ -188,9 +188,9 @@ const fetchData = async () => {
       <div className="bg-white dark:bg-gray-800 shadow w-full p-2 flex items-center justify-between">
         <div className="flex items-center">
           <img
-            src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png"
+            src="../icons/icono.png"
             alt="Logo"
-            className="w-28 h-18 mr-2 hidden md:flex"
+            className="w-12 h-18 mr-2 hidden md:flex"
           />
           <h2 className="font-bold text-xl hidden md:flex dark:text-gray-100">
             HomeFinder
@@ -199,7 +199,7 @@ const fetchData = async () => {
       </div>
       <div className="flex-1 flex">
         {/* Barra lateral */}
-        <aside className="p-2 bg-white dark:bg-gray-800 w-60 hidden md:flex flex-col">
+        <aside className="p-2 bg-white dark:bg-gray-800 w-60 hidden md:flex flex-col ">
           <nav>
             <button
               className={`block py-2.5 px-4 my-4 rounded ${activeSection === "usuarios" ? "bg-gradient-to-r from-cyan-400 to-cyan-300 text-white" : "text-gray-500 dark:text-gray-300"}`}
