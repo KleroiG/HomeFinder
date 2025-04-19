@@ -27,7 +27,22 @@ Está construido con una arquitectura modular utilizando **React** y siguiendo e
 
 - 📘 [Manual de usuario](https://github.com/user-attachments/files/19817541/Manual.de.usuario.docx)  
 - 💻 [Manual del programador](https://github.com/user-attachments/files/19817540/Manual.del.programador.docx)
+---
 
+### 📷 Capturas de pantalla
+
+A continuación se presentan algunas imágenes del funcionamiento de la plataforma:
+
+![Captura de pantalla 2025-04-18 194352](https://github.com/user-attachments/assets/1cf21ab5-afb8-4346-900d-0852645123c4)
+*Página principal de HomeFinder*
+
+![busqueda](https://github.com/user-attachments/assets/e73a6ebe-d2ec-496d-b1a3-a82abde625e7)
+*Resultados de búsqueda filtrados por ubicación y fechas*
+
+![image](https://github.com/user-attachments/assets/4b6498c2-9fd5-4667-ba15-be1952b1f59a)
+ *Vista detallada de un inmueble con opción de reserva*
+
+---
 ---
 
 > Si tienes preguntas, sugerencias o deseas contribuir, ¡no dudes en contactarnos o crear un issue!
