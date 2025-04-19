@@ -37,12 +37,11 @@ A continuación se presentan algunas imágenes del funcionamiento de la platafor
 *Página principal de HomeFinder*
 
 ![busqueda](https://github.com/user-attachments/assets/e73a6ebe-d2ec-496d-b1a3-a82abde625e7)
-*Resultados de búsqueda filtrados por ubicación y fechas*
+*Resultados de búsqueda filtrados por ubicación*
 
 ![image](https://github.com/user-attachments/assets/4b6498c2-9fd5-4667-ba15-be1952b1f59a)
  *Vista detallada de un inmueble con opción de reserva*
-
----
+ 
 ---
 
 > Si tienes preguntas, sugerencias o deseas contribuir, ¡no dudes en contactarnos o crear un issue!
