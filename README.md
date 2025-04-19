@@ -33,7 +33,7 @@ Está construido con una arquitectura modular utilizando **React** y siguiendo e
 
 A continuación se presentan algunas imágenes del funcionamiento de la plataforma:
 
-![Captura de pantalla 2025-04-18 194352](https://github.com/user-attachments/assets/1cf21ab5-afb8-4346-900d-0852645123c4)
+![image](https://github.com/user-attachments/assets/f37c8ee1-0e17-4d8c-9f49-9b8e40c9eba9)
 *Página principal de HomeFinder*
 
 ![busqueda](https://github.com/user-attachments/assets/e73a6ebe-d2ec-496d-b1a3-a82abde625e7)
